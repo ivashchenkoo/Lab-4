@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Airplane extends Mashine { // Клас Літак похідний від суперкласу Mashine
 
     private double mass;
@@ -9,13 +11,28 @@ public class Airplane extends Mashine { // Клас Літак похідний 
         this.wheelNum = wheelNum;
     }
 
-    public void setMass(double mass) {
-        this.mass = mass;
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Mass: " + mass +
+                " t\nWheel number: " + wheelNum;
     }
 
-    public void setWheelNum(int wheelNum) {
-        this.wheelNum = wheelNum;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Airplane airplane = (Airplane) o;
+        return Double.compare(airplane.mass, mass) == 0 &&
+                wheelNum == airplane.wheelNum;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), mass, wheelNum);
+    }
+
     //Перевизначення методів абстрактного класу
     @Override
     public void showInfo(){
@@ -66,5 +83,13 @@ public class Airplane extends Mashine { // Клас Літак похідний 
     @Override
     public int getWheelNum() {
         return wheelNum;
+    }
+
+    public void setMass(double mass) {
+        this.mass = mass;
+    }
+
+    public void setWheelNum(int wheelNum) {
+        this.wheelNum = wheelNum;
     }
 }

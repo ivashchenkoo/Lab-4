@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Airliner extends Airplane { //Похідний клас пасажирського літака від суперкласу Літака
 
     private final int maxPassNum;
@@ -10,6 +12,32 @@ public class Airliner extends Airplane { //Похідний клас пасаж�
         this.minPassNum = minPassNum;
         this.passNum = passNum;
     }
+
+    @Override
+    public String toString() {
+        return "----------Airliner----------\n" + super.toString() +
+                "Number of passengers: " + passNum +
+                "\nMax number of passengers: " + maxPassNum +
+                "\nMin number of passengers: " + minPassNum +
+                "\n--------.toString()---------";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Airliner airliner = (Airliner) o;
+        return maxPassNum == airliner.maxPassNum &&
+                minPassNum == airliner.minPassNum &&
+                passNum == airliner.passNum;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), maxPassNum, minPassNum, passNum);
+    }
+
     //Перевизначення методів суперкласу
     @Override
     public void showInfo(){
